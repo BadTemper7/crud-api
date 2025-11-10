@@ -14,17 +14,9 @@ app.use(express.json());
 
 // Routes
 app.use("/api/tasks", taskRoutes);
+app.get("/", (req, res) => res.send("✅ API is running..."));
 
-// Base route
-app.get("/", (req, res) => {
-  res.send("✅ Task CRUD API is running...");
-});
-
-// Connect to DB & start server
+// Connect DB (only once)
 connectDB();
 
-// For local testing
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-
-export default app; // Needed for Vercel
+export default app; // Important: do not use app.listen() for Vercel
